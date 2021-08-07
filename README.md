@@ -1,6 +1,6 @@
 # Degree of Profanity for Racial Slurs
 
-This is a small python program which tags a profanity degree ( "HIGH" or "LOW" ) based on the slur words present in a tweet/sentence.
+This is a small python program that tags a profanity degree ( "HIGH" or "LOW" ) based on the slur words present in a tweet/sentence.
 
 ## Project Tree:
 ```bash
@@ -19,7 +19,7 @@ This is a small python program which tags a profanity degree ( "HIGH" or "LOW" )
 
 
 * ### Data : ethnic_slurs.csv
-  * This is scraped dataset of ethnic slur terms from the wikipedia website : https://en.wikipedia.org/wiki/List_of_ethnic_slurs.
+  * This is scraped dataset of ethnic slur terms from the Wikipedia website : https://en.wikipedia.org/wiki/List_of_ethnic_slurs.
   * One can personalise the dataset by adding custom slur/other words collection.
 
 
