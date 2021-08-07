@@ -2,9 +2,6 @@
 
 This is a small python program which tags a profanity degree ( "HIGH" or "LOW" ) based on the slur words present in a tweet/sentence.
 
-This project is built upon the 'profanityfilter' library from author @areebbeigh.
-
-
 ## Project Tree:
 ```bash
 |-- Data
