@@ -5,8 +5,9 @@ This is a small python program which tags a profanity degree ( "HIGH" or "LOW" )
 ## Project Tree:
 ```bash
 |-- Data
-|   |-- ethnic_slurs.csv
-|-- tweets_data.csv
+|   |-- racial_slur_collection
+|   |      |--ethnic_slurs.csv
+|   |-- tweets_data.csv
 |-- output_result.csv
 |-- profanity_degree.py
 ```
