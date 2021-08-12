@@ -1,15 +1,15 @@
 from csv import reader, writer                  # to operate on csv files
-from os import error                            # to handle I/O errors       
+
 from pathlib import Path                        # to manage Paths
 from profanityfilter import ProfanityFilter     # to check the Profanity of words
+import sys,os                                   # to handle command line arguments and os errors
 
 # constants
-CUSTOM_SLUR_WORD_FILE = './Data/racial_slur_collection/ethnic_slurs.csv'
+CUSTOM_SLUR_WORD_FILE = './twitter-profanity-check/Data/racial_slur_collection/ethnic_slurs.csv'
 OUTPUT_FILE = './output_result.csv'
 INPUT_FILE = './Data/tweets_data.csv'
 HEADER = ['ProfanityDegree','Twitter_ID','Tweet']
-
-
+# AffinitySolution\twitter-profanity-check\Data\racial_slur_collection\ethnic_slurs.csv
 class Profanity:
     def __init__(self):
         self.pf = ProfanityFilter()
@@ -23,8 +23,8 @@ class Profanity:
                 with open(file_path, 'r') as f:
                     custom_censor_list = [line.strip() for line in f.readlines()]
                     self.pf.append_words(custom_censor_list)
-        except error:
-            print("ERROR :: Couldn't find the path for custom slur words")
+        except:
+            print("ERROR :: Couldn't find the path for custom slur words",os.error)
         
 
     def collect_tweets(self, tweet_file = None):
@@ -39,7 +39,7 @@ class Profanity:
                     if header != None:
                         self.check_profanity(csv_reader)
                         
-        except error:
+        except:
             print("ERROR :: check the path given for input tweet dataset file")
 
     
@@ -52,7 +52,7 @@ class Profanity:
 
                             self.fetched_tweets.append([profanity_degree, row[0], row[1]])
 
-        except error:
+        except:
             print("ERROR :: CHECK the instance reference given to the csv reader object")
     
 
@@ -65,16 +65,25 @@ class Profanity:
                         csv_writer = writer(write_obj)
                         csv_writer.writerow(HEADER)
                         csv_writer.writerows(processed_rows)
-                except error:
+                except os.error:
                     print("ERROR :: failure in writing output to the destined file")
 
         
-        except error:
+        except:
             print("ERROR :: Problem with the processed fetched tweets")
 
 
 def main(dataset):
     profanity = Profanity()
+
+    # to check command line path for data input
+    try:
+        if(dataset != None):
+         INPUT_FILE = dataset
+         print("input_file ",INPUT_FILE)
+         
+    except:
+        print("ERROR :: please input correct path for the input file")
 
     # adding the custom slur words from the racial_slur_collection
     profanity.add_words(CUSTOM_SLUR_WORD_FILE)
@@ -88,6 +97,31 @@ def main(dataset):
 
 if __name__ == '__main__':
     
-    main(INPUT_FILE)
+    try:
+        if(os.path.exists(sys.argv[1]) and len(sys.argv) == 2):
+            arg_file_path = sys.argv[1]
+            # print(os.path.basename(arg_file_path))
+            print(os.path.exists(arg_file_path))
+            # print(os.defpath(arg_file_path))
+            # print(os.path.abspath(arg_file_path))
 
-    print("-"*62+"\n\tPROCESSED THE tweets_data.csv SUCCESSFULLY\n\tCHECK THE 'output_result.csv' for RESULTS\n"+"-"*62)
+            main(Path(sys.argv[1]))
+            
+
+            print("-"*70+"\n\tPROCESSED THE tweets_data.csv SUCCESSFULLY\n\tCHECK THE 'output_result.csv' for RESULTS\n"+"-"*70)
+
+
+        else:
+            print("length of argv", len(sys.argv)) 
+            print("-"*70+"\n\t\t\tUnable to process\n->CHECK THE 'PATH' of the relevant .csv file\n->for spaced folder or file names use '' e.g. '/folder name/file.csv'\n"+"-"*70)
+    except:
+        print("Problem :: exception in the in the main function")
+
+
+
+
+
+#   FOR TESTING THE ARGUMENT INPUT VALUES
+    # print(f"Arguments count: {len(sys.argv)}")
+    # for i, arg in enumerate(sys.argv):
+    #     print(f"Argument {i:>6}: {arg}")
