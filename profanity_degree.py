@@ -7,8 +7,9 @@ import sys,os                                   # to handle command line argumen
 # constants
 CUSTOM_SLUR_WORD_FILE = './twitter-profanity-check/Data/racial_slur_collection/ethnic_slurs.csv'
 OUTPUT_FILE = './output_result.csv'
-INPUT_FILE = './Data/tweets_data.csv'
+# INPUT_FILE = './Data/tweets_data.csv'
 HEADER = ['ProfanityDegree','Twitter_ID','Tweet']
+
 # AffinitySolution\twitter-profanity-check\Data\racial_slur_collection\ethnic_slurs.csv
 class Profanity:
     def __init__(self):
@@ -80,7 +81,7 @@ def main(dataset):
     try:
         if(dataset != None):
          INPUT_FILE = dataset
-         print("input_file ",INPUT_FILE)
+         print(f"\nINPUT FILE : {INPUT_FILE}\n")
          
     except:
         print("ERROR :: please input correct path for the input file")
@@ -100,11 +101,6 @@ if __name__ == '__main__':
     try:
         if(os.path.exists(sys.argv[1]) and len(sys.argv) == 2):
             arg_file_path = sys.argv[1]
-            # print(os.path.basename(arg_file_path))
-            print(os.path.exists(arg_file_path))
-            # print(os.defpath(arg_file_path))
-            # print(os.path.abspath(arg_file_path))
-
             main(Path(sys.argv[1]))
             
 
@@ -112,7 +108,7 @@ if __name__ == '__main__':
 
 
         else:
-            print("length of argv", len(sys.argv)) 
+            # print("length of argv", len(sys.argv)) 
             print("-"*70+"\n\t\t\tUnable to process\n->CHECK THE 'PATH' of the relevant .csv file\n->for spaced folder or file names use '' e.g. '/folder name/file.csv'\n"+"-"*70)
     except:
         print("Problem :: exception in the in the main function")
