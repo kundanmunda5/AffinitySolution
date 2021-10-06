@@ -1,7 +1,7 @@
 # Degree of Profanity for Racial Slurs
 
 This is a small python program that tags a profanity degree ( "HIGH" or "LOW" ) based on the slur words present in a tweet/sentence.
-
+[credits](#credits-1)
 ## Project Tree:
 ```bash
 |-- Data
@@ -36,6 +36,6 @@ python.exe profanity_degree.py 'D:/folder 1/folder 2/input_file_name.csv'
   * One can personalise the dataset by adding custom slur/other words collection.
 
 
-### Credits
+### Credits 1
 This project is built on the library [profanityfilter](https://github.com/areebbeigh/profanityfilter) by [@areebbeigh](https://github.com/areebbeigh)
 
